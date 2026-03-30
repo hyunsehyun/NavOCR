@@ -9,9 +9,6 @@ from cv_bridge import CvBridge
 import cv2
 import os
 
-# Disable PaddlePaddle PIR mode to avoid oneDNN compatibility issues on CPU
-os.environ['FLAGS_enable_pir_api'] = '0'
-os.environ['FLAGS_enable_pir_in_executor'] = '0'
 import time
 
 from navocr.detector import PaddleDetector
@@ -136,7 +133,6 @@ class NavOCRWithOCRNode(Node):
         self.get_logger().info(f'Initializing PaddleOCR (language: {ocr_lang})...')
         try:
             self.ocr = PaddleOCR(
-                use_gpu=False,
                 lang=ocr_lang,
                 use_angle_cls=True,
                 det_db_thresh=0.25,

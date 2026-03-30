@@ -35,6 +35,11 @@ git clone git@github.com:kc-ml2/NavOCR.git
 
 Install PaddleDetection following [offical guide](https://github.com/PaddlePaddle/PaddleDetection/blob/release/2.8.1/docs/tutorials/INSTALL.md).
 
+Install PaddleOCR:
+```bash
+pip install paddleocr==2.8.1
+```
+
 ### Download Testset
 Not required if you use ROS node
 
@@ -62,6 +67,11 @@ python run_inference.py   -c configs/ppyoloe/ppyoloe_crn_s_infer_only.yml   \
 cd ~/ros2_ws
 colcon build --packages-select navocr
 source install/setup.bash
+
+# If you encounter oneDNN compatibility issues on CPU, set these before running:
+export FLAGS_enable_pir_api=0
+export FLAGS_enable_pir_in_executor=0
+
 ros2 run navocr navocr_with_ocr_node
 ```
 
